@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @ram59
+- 👋 Hi, I’m Ramanjaneyulu Ulli
 - 👀 I’m interested in coding
 - 🌱 I’m currently learning servlets and jsp's
 - 💞️ I’m looking to collaborate on spring projects
