@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Ramanjaneyulu Ulli
 - 👀 I’m interested in coding
-- 🌱 I’m currently learning servlets,jsp's,LOG4J and SLF4j
+- 🌱 I’m currently learning servlets,jsp's,LOG4J,SLF4j and XML
 - 💞️ I’m looking to collaborate on spring projects
 - 📫 How to reach me?Mail @ ramanjaneyulu010@gmail.com or phone: +91 7093156968
 
