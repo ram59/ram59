@@ -1,0 +1,76 @@
+package com.nt.servlet;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class EmployeeDbServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private static final String GET_EMP_DETAILS="SELECT * FROM EMP WHERE EMPNO=?";
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		//Using try-with-resource.So no need to close the obj's separately.
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		}catch(ClassNotFoundException cnf) {
+			cnf.printStackTrace();
+		}
+		try(
+				
+			PrintWriter pw=res.getWriter();
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1522:orcl1","scott","scott1");
+				PreparedStatement ps=con.prepareStatement(GET_EMP_DETAILS);
+				){
+			
+			//Read form data
+			int eno = Integer.parseInt(req.getParameter("eno"));
+			
+			//Business logic
+			ps.setInt(1, eno);
+			//Execute the pre-compiled sql-query
+			try(ResultSet rs=ps.executeQuery()){
+				if(rs.next()) {
+					pw.println("<table border='1' align='center'>");
+					pw.println("<tr><th>emp-no</th><th>emp-name</th><th>emp-job</th></tr>");
+					pw.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(3));
+					pw.println("</table>");
+				}//if
+				
+			}//inner-try
+			
+			}//outer-try
+		
+		//Handling known exception for Connection,getConnection(-,-,-),prepareStatement(-) etc.
+			catch(SQLException se) {
+			se.printStackTrace();
+			}
+		
+		//Handling known exception for PrintWriter stream obj.
+			catch(IOException ioe) {
+				ioe.printStackTrace();
+			} 
+		
+		
+		//Handling unknown exception
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}//doGet(-,-)
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		doGet(req, res);
+	}//doPost(-,-)
+
+}
