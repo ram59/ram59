@@ -1,0 +1,15 @@
+<web-app>
+
+<servlet>
+	<servlet-name>load</servlet-name>
+	<jsp-file>/WEB-INF/pages/first.jsp</jsp-file>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>load</servlet-name>
+	<url-pattern>/load</url-pattern>
+</servlet-mapping>
+
+</web-app>
+
