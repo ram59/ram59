@@ -1,0 +1,27 @@
+<%!
+static{
+	System.out.println("static block::(JES class loading)");
+}
+
+public first_jsp(){
+	System.out.println("0-param constructor::(JES class obj. creation)");
+}
+
+public void jspInit(){
+	System.out.println("initialization i.e jspInit()::(JES class initialization)");
+}
+
+%>
+
+<b>Hello ram</b>
+
+<%
+ System.out.println("request processing.. _jspService(-,-))");
+%>
+
+
+<%!
+public void jspDestroy(){
+	System.out.println("destruction::(JES class obj. destruction)");
+}
+%>
